@@ -68,7 +68,7 @@ import WidgetsTables from "../pages/widgets-tables";
 import WidgetsCharts from "../pages/widgets-charts";
 import WidgetsStatistics from "../pages/widgets-statistics";
 import WidgetsMiscellaneous from "../pages/widgets-miscellaneous";
-import Login from "../pages/login";
+import Login from "../pages/Login";
 import ProtectedRoute from "../Protected route/ProtectedRoute";
 import PublicRoute from "../Public route/PublicRoute";
 import AccountsList from "../pages/AccountsList";
