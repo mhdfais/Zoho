@@ -1,5 +1,4 @@
-import AccountTable from "@/components/account/accountTable";
-import CustomersTable from "@/components/customers/CustomersTable";
+import AccountTable from "@/components/account/AccountTable";
 import React from "react";
 
 const AccountsList = () => {
