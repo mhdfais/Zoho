@@ -1,8 +1,10 @@
 import { connectDB } from "./config/db";
 import express from "express";
 import dotenv from "dotenv";
-import cors from 'cors'
-import zohoRoutes from './routes/zohoRoutes'
+import cors from "cors";
+import zohoRoutes from "./routes/zohoAuthRoutes";
+import crmRoutes from './routes/zohoCrmRoutes'
+// import bookRoutes from './routes/zohoBookRoutes'
 
 dotenv.config();
 
@@ -10,11 +12,17 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors())
+app.use(
+  cors({
+    origin: `${process.env.FRONTEND_URL}`, 
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
 
-
-app.use('/',zohoRoutes)
-
+app.use("/", zohoRoutes);
+app.use('/crm',crmRoutes)
+// app.use('/book',bookRoutes)
 
 const port = process.env.PORT;
 
