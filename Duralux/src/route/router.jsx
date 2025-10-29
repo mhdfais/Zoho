@@ -75,7 +75,6 @@ import AccountsList from "../pages/AccountsList";
 import AccountCreate from "../pages/AccountCreate";
 import AccountEdit from "@/components/account/AccountEdit";
 import AccountView from "../pages/AccountView";
-import LeadsList from "../pages/LeadsList";
 import LeadCreate from "../pages/LeadCreate";
 import LeadEdit from "@/components/leads/LeadEdit";
 import LeadView from "../pages/LeadView";
@@ -86,6 +85,7 @@ import ContactView from "../pages/ContactView";
 import DealsList from "../pages/DealsList";
 import DealCreate from "../pages/DealCreate";
 import DealEdit from "@/components/Deals/DealEdit";
+import LeadsList from "../pages/LeadsList";
 
 export const router = createBrowserRouter([
   {
