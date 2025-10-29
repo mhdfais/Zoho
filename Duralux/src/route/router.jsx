@@ -85,7 +85,7 @@ import ContactView from "../pages/ContactView";
 import DealsList from "../pages/DealsList";
 import DealCreate from "../pages/DealCreate";
 import DealEdit from "@/components/Deals/DealEdit";
-import LeadsList from "../pages/LeadsList";
+import LeadList from "../pages/LeadList";
 
 export const router = createBrowserRouter([
   {
@@ -104,7 +104,7 @@ export const router = createBrowserRouter([
       { path: "/sales/create-account", element: <AccountCreate /> },
       { path: "/sales/edit-account/:id", element: <AccountEdit /> },
       { path: "/sales/account/:id", element: <AccountView /> },
-      { path: "/sales/leads", element: <LeadsList /> },
+      { path: "/sales/leads", element: <LeadList /> },
       { path: "/sales/create-lead", element: <LeadCreate /> },
       { path: "/sales/edit-lead/:id", element: <LeadEdit /> },
       { path: "/sales/lead/:id", element: <LeadView /> },

@@ -2,7 +2,7 @@ import LeadsTable from "@/components/leads/LeadsTable";
 import React from "react";
 // import LeadsTable from '@/c'
 
-const LeadsList = () => {
+const LeadList = () => {
   return (
     <div className="main-content">
       <div className="row">
@@ -12,4 +12,4 @@ const LeadsList = () => {
   );
 };
 
-export default LeadsList;
+export default LeadList;
