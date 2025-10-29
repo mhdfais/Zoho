@@ -18,7 +18,7 @@ import Proposalist from "../pages/proposal-list";
 import CustomersList from "../pages/customers-list";
 import ProposalView from "../pages/proposal-view";
 import ProposalEdit from "../pages/proposal-edit";
-import LeadsList from "../pages/leadsList";
+// import LeadsList from "../pages/leadsList";
 import CustomersView from "../pages/customers-view";
 import CustomersCreate from "../pages/customers-create";
 import ProposalCreate from "../pages/proposal-create";
@@ -75,6 +75,17 @@ import AccountsList from "../pages/AccountsList";
 import AccountCreate from "../pages/AccountCreate";
 import AccountEdit from "@/components/account/AccountEdit";
 import AccountView from "../pages/AccountView";
+import LeadsList from "../pages/LeadsList";
+import LeadCreate from "../pages/LeadCreate";
+import LeadEdit from "@/components/leads/LeadEdit";
+import LeadView from "../pages/LeadView";
+import ContactList from "../pages/ContactList";
+import ContactCreate from "../pages/ContactCreate";
+import ContactEdit from "@/components/contact/ContactEdit";
+import ContactView from "../pages/ContactView";
+import DealsList from "../pages/DealsList";
+import DealCreate from "../pages/DealCreate";
+import DealEdit from "@/components/Deals/DealEdit";
 
 export const router = createBrowserRouter([
   {
@@ -93,6 +104,17 @@ export const router = createBrowserRouter([
       { path: "/sales/create-account", element: <AccountCreate /> },
       { path: "/sales/edit-account/:id", element: <AccountEdit /> },
       { path: "/sales/account/:id", element: <AccountView /> },
+      { path: "/sales/leads", element: <LeadsList /> },
+      { path: "/sales/create-lead", element: <LeadCreate /> },
+      { path: "/sales/edit-lead/:id", element: <LeadEdit /> },
+      { path: "/sales/lead/:id", element: <LeadView /> },
+      { path: "/sales/contacts", element: <ContactList /> },
+      { path: "/sales/create-contact", element: <ContactCreate /> },
+      { path: "/sales/edit-contact/:id", element: <ContactEdit /> },
+      { path: "/sales/contact/:id", element: <ContactView /> },
+      { path: "/sales/deals", element: <DealsList /> },
+      { path: "/sales/create-deal", element: <DealCreate /> },
+      { path: "/sales/edit-deal/:id", element: <DealEdit /> },
 
       {
         path: "/dashboards/analytics",

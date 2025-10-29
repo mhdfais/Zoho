@@ -2,74 +2,75 @@ import React, { useEffect, useState } from "react";
 import { FiEdit3, FiMoreHorizontal, FiTrash2 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import {deleteLead, getLeads as getAllLeads} from '../../services/zohoCrmService'
+import { deleteDeal, getAllDeals } from "../../services/zohoCrmService";
 
-const LeadsTable = () => {
-  const [leads, setLeads] = useState([]);
+const DealsTable = () => {
+  const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  //  Fetch all leads
+  // Fetch all deals
   useEffect(() => {
-    const getLeads = async () => {
+    const fetchDeals = async () => {
       try {
         setError(null);
-        const res = await getAllLeads();
-        setLeads(res.data || []);
+        setLoading(true);
+        const res = await getAllDeals();
+        setDeals(res.data || []);
       } catch (error) {
         if (error.response?.status === 429) {
           toast.error("Too many requests. Please wait a few seconds.");
         } else {
-          toast.error("Failed to load leads.");
-          console.error("Error fetching leads:", error);
+          toast.error("Failed to load deals.");
+          console.error("Error fetching deals:", error);
         }
-        setError(error.message || "Failed to load leads");
+        setError(error.message || "Failed to load deals");
       } finally {
         setLoading(false);
       }
     };
 
-    getLeads();
+    fetchDeals();
   }, []);
 
-  //  Handle edit / delete actions
-  const handleAction = async (action, lead, leadId) => {
+  // Handle Edit / Delete actions
+  const handleAction = async (action, deal) => {
     if (action === "Edit") {
-      navigate(`/sales/edit-lead/${leadId}`);
+      navigate(`/sales/edit-deal/${deal.id}`);
     } else if (action === "Delete") {
       try {
         const confirmDelete = window.confirm(
-          `Are you sure you want to delete lead "${lead.Full_Name || lead.Last_Name}"?`
+          `Are you sure you want to delete deal "${deal.Deal_Name}"?`
         );
         if (!confirmDelete) return;
 
-        await deleteLead(lead.id);
-        setLeads((prev) => prev.filter((l) => l.id !== lead.id));
-        toast.success("Lead deleted successfully.");
+        await deleteDeal(deal.id);
+        setDeals((prev) => prev.filter((d) => d.id !== deal.id));
+        toast.success("Deal deleted successfully.");
       } catch (error) {
         if (error.response?.status === 429) {
           toast.error("Too many requests. Please wait a few seconds.");
         } else {
-          toast.error("Failed to delete lead.");
-          console.error("Error deleting lead:", error);
+          toast.error("Failed to delete deal.");
+          console.error("Error deleting deal:", error);
         }
       }
     }
   };
 
-  //  Loading state
+  // Loading state
   if (loading)
     return (
       <div className="text-center py-4">
         <div className="spinner-border text-primary" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
-        <p className="mt-2">Loading leads...</p>
+        <p className="mt-2">Loading deals...</p>
       </div>
     );
 
-  //  Error state
+  // Error state
   if (error)
     return (
       <div className="alert alert-danger" role="alert">
@@ -78,23 +79,23 @@ const LeadsTable = () => {
     );
 
   // No data
-  if (leads.length === 0)
+  if (deals.length === 0)
     return (
       <div className="alert alert-secondary" role="alert">
-        No leads found.
+        No deals found.
       </div>
     );
 
-  //  Table
+  // Table
   return (
     <div className="container mt-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h4 className="mb-0">Leads</h4>
+        <h4 className="mb-0">Deals</h4>
         <button
-          onClick={() => navigate("/sales/create-lead")}
+          onClick={() => navigate("/sales/create-deal")}
           className="btn btn-primary"
         >
-          + Create Lead
+          + Create Deal
         </button>
       </div>
 
@@ -102,30 +103,28 @@ const LeadsTable = () => {
         <table className="table table-bordered table-hover align-middle">
           <thead className="table-primary">
             <tr>
-              <th>Lead Name</th>
-              <th>Company</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Lead Source</th>
+              <th>Deal Name</th>
+              <th>Account Name</th>
+              <th>Stage</th>
+              <th>Amount</th>
+              <th>Closing Date</th>
+              <th>Owner</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {leads.map((lead, index) => (
+            {deals.map((deal, index) => (
               <tr
                 key={index}
                 className="cursor-pointer"
-                onClick={() => navigate(`/sales/lead/${lead.id}`)}
+                onClick={() => navigate(`/sales/deal/${deal.id}`)}
               >
-                <td>
-                  {lead.Full_Name ||
-                    `${lead.First_Name || ""} ${lead.Last_Name || ""}`.trim() ||
-                    "—"}
-                </td>
-                <td>{lead.Company || "—"}</td>
-                <td>{lead.Email || "—"}</td>
-                <td>{lead.Phone || "—"}</td>
-                <td>{lead.Lead_Source || "—"}</td>
+                <td>{deal.Deal_Name || "—"}</td>
+                <td>{deal.Account_Name?.name || "—"}</td>
+                <td>{deal.Stage || "—"}</td>
+                <td>{deal.Amount ? `AED ${deal.Amount}` : "—"}</td>
+                <td>{deal.Closing_Date || "—"}</td>
+                <td>{deal.Owner?.name || "—"}</td>
                 <td>
                   <div className="dropdown">
                     <button
@@ -143,7 +142,7 @@ const LeadsTable = () => {
                           className="dropdown-item d-flex align-items-center"
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleAction("Edit", lead, lead.id);
+                            handleAction("Edit", deal);
                           }}
                         >
                           <FiEdit3 className="me-2" /> Edit
@@ -154,7 +153,7 @@ const LeadsTable = () => {
                           className="dropdown-item d-flex align-items-center text-danger"
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleAction("Delete", lead);
+                            handleAction("Delete", deal);
                           }}
                         >
                           <FiTrash2 className="me-2" /> Delete
@@ -172,4 +171,4 @@ const LeadsTable = () => {
   );
 };
 
-export default LeadsTable;
+export default DealsTable;

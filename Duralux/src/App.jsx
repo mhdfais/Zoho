@@ -19,14 +19,23 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-      dispatch(checkZohoConnection()); 
+      dispatch(checkZohoConnection());
     }, [dispatch]);
 
     return <RouterProvider router={router} />;
   };
   return (
     <>
-    <Toaster position="bottom-right" />
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          className: "",
+          style: {
+            background: "#3454d1",
+            color: "white",
+          },
+        }}
+      />
       <Provider store={store}>
         <NavigationProvider>
           <SideBarToggleProvider>

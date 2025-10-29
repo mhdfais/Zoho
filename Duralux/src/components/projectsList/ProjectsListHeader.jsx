@@ -2,7 +2,7 @@ import React from 'react'
 import { FiBarChart, FiFilter, FiPaperclip, FiPlus } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import Dropdown from '@/components/shared/Dropdown'
-import { fileType } from '../leads/LeadsHeader'
+// import { fileType } from '../leads/LeadsHeader'
 import ProjectsStatistics from '../widgetsStatistics/ProjectsStatistics'
 
 const options = [
@@ -32,7 +32,7 @@ const ProjectsListHeader = () => {
           isItemIcon={false}
         />
         <Dropdown
-          dropdownItems={fileType}
+          // dropdownItems={fileType}
           triggerPosition={"0, 12"}
           triggerIcon={<FiPaperclip size={16} strokeWidth={1.6} />}
           triggerClass='btn btn-icon btn-light-brand'

@@ -1,14 +1,14 @@
-import ContactTable from '@/components/contact/ContactTable'
+import DealsTable from '@/components/Deals/DealsTable'
 import React from 'react'
 
-const ContactList = () => {
+const DealsList = () => {
   return (
      <div className="main-content">
         <div className="row">
-          <ContactTable />
+         <DealsTable />
         </div>
       </div>
   )
 }
 
-export default ContactList
+export default DealsList

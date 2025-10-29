@@ -88,6 +88,10 @@ const AccountEdit = () => {
     setSaving(true);
     setError(null);
     try {
+      if(formData.Account_Name.trim()===''){
+        toast.error('account name is required')
+        return
+      }
       await editAccount(id, formData);
       navigate("/sales/accounts");
     } catch (error) {
@@ -140,7 +144,7 @@ const AccountEdit = () => {
             <div className="mb-3">
               <label className="form-label">Phone</label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 name="Phone"
                 value={formData.Phone}
@@ -151,7 +155,7 @@ const AccountEdit = () => {
             <div className="mb-3">
               <label className="form-label">Website</label>
               <input
-                type="text"
+                type="url"
                 className="form-control"
                 name="Website"
                 value={formData.Website}
@@ -162,7 +166,7 @@ const AccountEdit = () => {
             <div className="mb-3">
               <label className="form-label">Account Number</label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 name="Account_Number"
                 value={formData.Account_Number}
@@ -293,7 +297,7 @@ const AccountEdit = () => {
             <div className="mb-3">
               <label className="form-label">Zip Code</label>
               <input
-                type="text"
+                type="tetxt"
                 className="form-control"
                 name="Billing_Code"
                 value={formData.Billing_Code}

@@ -37,6 +37,8 @@ export const getAccounts = async (req: Request, res: Response) => {
       error: "Failed to fetch accounts",
       details: message,
     });
+    console.error("zoho CRM Error:", status, err.response?.data || err.message);
+
   }
 };
 

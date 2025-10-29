@@ -87,7 +87,14 @@ export const zohoCallback = async (req: Request, res: Response) => {
   }
 };
 
+let cachedToken : string|null=null;
+let tokenExpiry = 0;
 export const getAccessToken = async () => {
+  const now = Date.now();
+  if (cachedToken && now < tokenExpiry) {
+    return cachedToken;
+  }
+
   let token = await ZohoToken.findOne();
   if (!token) throw new Error("No token found!");
 
@@ -106,6 +113,12 @@ export const getAccessToken = async () => {
 
   token.access_token = response.data.access_token;
   await token.save();
+
+  cachedToken = response.data.access_token;
+  tokenExpiry = now + 3600 * 1000; // valid for 1 hour
+
+  console.log(" Refreshed Zoho access token at", new Date().toISOString());
+
   return token.access_token;
 };
 

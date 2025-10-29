@@ -19,18 +19,38 @@ export const menuList = [
       },
     ],
   },
-  { id: 111, name: "Sales", path: "#", dropdownMenu: [
-    {id:1,
-     name:'Accounts',
-     path:'/sales/accounts',
-      subdropdownMenu: false,
-    },{
-        id:2,
-        name:'Contacts',
-        path:'',
-         subdropdownMenu: false,
-    }
-  ] },
+  {
+    id: 111,
+    name: "Sales",
+    path: "#",
+    icon: "bill-wave",
+    dropdownMenu: [
+      {
+        id: 1,
+        name: "Leads",
+        path: "/sales/leads",
+        subdropdownMenu: false,
+      },
+      {
+        id: 2,
+        name: "Contacts",
+        path: "/sales/contacts",
+        subdropdownMenu: false,
+      },
+      {
+        id: 3,
+        name: "Accounts",
+        path: "/sales/accounts",
+        subdropdownMenu: false,
+      },
+      {
+        id: 4,
+        name: "Deals",
+        path: "/sales/deals",
+        subdropdownMenu: false,
+      },
+    ],
+  },
   {
     id: 1,
     name: "reports",

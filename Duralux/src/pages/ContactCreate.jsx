@@ -1,31 +1,38 @@
 import React, { useState } from "react";
-import { createAccount } from "../services/zohoCrmService";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { createContact, fetchAccounts } from "../services/zohoCrmService";
 
-const AccountCreate = () => {
+const ContactCreate = () => {
   const [formData, setFormData] = useState({
-    accountName: "",
+    firstName: "",
+    lastName: "",
+    email: "",
     phone: "",
-    website: "",
-    accountNumber: "",
-    accountType: "",
-    industry: "",
-    employees: "",
-    annualRevenue: "",
-    billingStreet: "",
-    billingCity: "",
-    billingState: "",
-    billingCode: "",
-    billingCountry: "",
-    shippingStreet: "",
-    shippingCity: "",
-    shippingState: "",
-    shippingCode: "",
-    shippingCountry: "",
+    mobile: "",
+    title: "",
+    department: "",
+    leadSource: "",
     description: "",
+    mailingStreet: "",
+    mailingCity: "",
+    mailingState: "",
+    mailingCode: "",
+    mailingCountry: "",
+    otherStreet: "",
+    otherCity: "",
+    otherState: "",
+    otherCode: "",
+    otherCountry: "",
+    accountId: "",
+    vendorId: "",
   });
-  const [loading, setloading] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+  const [accounts, setAccounts] = useState([]);
+  //   const [vendors, setVendors] = useState([]);
+  const [loadingAccounts, setLoadingAccounts] = useState(false);
+  //   const [loadingVendors, setLoadingVendors] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -33,60 +40,69 @@ const AccountCreate = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Lazy-load accounts
+  const handleAccountFocus = async () => {
+    if (accounts.length > 0) return;
+    try {
+      setLoadingAccounts(true);
+      const res = await fetchAccounts();
+      setAccounts(res.data || []);
+      //   console.log(res)
+    } catch (err) {
+      toast.error("Failed to load accounts.");
+      console.error(err);
+    } finally {
+      setLoadingAccounts(false);
+    }
+  };
+
+  // Lazy-load vendors
+  //   const handleVendorFocus = async () => {
+  //     if (vendors.length > 0) return;
+  //     try {
+  //       setLoadingVendors(true);
+  //       const res = await fetchVendors();
+  //       setVendors(res.data || []);
+  //     } catch (err) {
+  //       toast.error("Failed to load vendors.");
+  //       console.error(err);
+  //     } finally {
+  //       setLoadingVendors(false);
+  //     }
+  //   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setloading(true);
-      if (formData.accountName.trim() === "") {
-        toast.error("account name is required");
+      setLoading(true);
+      if (formData.lastName.trim() === "") {
+        toast.error("last name cannot be empty");
         return;
       }
-      const res = await createAccount(formData);
-      navigate("/sales/accounts");
-      // console.log("created");
+      await createContact(formData);
+      toast.success("Contact created successfully!");
+      navigate("/sales/contacts");
     } catch (error) {
-      setloading(false);
       if (error.response?.status === 429) {
         toast.error("Too many requests. Please wait a few seconds.");
       } else {
-        toast.error("Failed to load accounts.");
-        console.error("Error fetching accounts:", error);
+        toast.error("Failed to create contact.");
+        console.error("Error creating contact:", error);
       }
     } finally {
-      setloading(false);
+      setLoading(false);
     }
   };
 
   const handleCancel = () => {
-    setFormData({
-      accountName: "",
-      phone: "",
-      website: "",
-      accountNumber: "",
-      accountType: "",
-      industry: "",
-      employees: "",
-      annualRevenue: "",
-      billingStreet: "",
-      billingCity: "",
-      billingState: "",
-      billingCode: "",
-      billingCountry: "",
-      shippingStreet: "",
-      shippingCity: "",
-      shippingState: "",
-      shippingCode: "",
-      shippingCountry: "",
-      description: "",
-    });
-    navigate("/sales/accounts");
+    navigate("/sales/contacts");
   };
 
   return (
     <div className="container pt-4">
       <div className="card shadow-sm">
         <div className="card-header bg-primary text-white">
-          <h5 className="mb-0 text-white">Create New Account</h5>
+          <h5 className="mb-0 text-white">Create New Contact</h5>
         </div>
 
         <div className="card-body">
@@ -95,16 +111,38 @@ const AccountCreate = () => {
               {/* Left Column */}
               <div className="col-md-6">
                 <div className="mb-3">
+                  <label className="form-label">First Name</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    className="form-control"
+                  />
+                </div>
+
+                <div className="mb-3">
                   <label className="form-label">
-                    Account Name <span className="text-danger">*</span>
+                    Last Name <span className="text-danger">*</span>
                   </label>
                   <input
                     type="text"
-                    name="accountName"
-                    value={formData.accountName}
+                    name="lastName"
+                    value={formData.lastName}
                     onChange={handleChange}
                     className="form-control"
                     required
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="form-control"
                   />
                 </div>
 
@@ -120,133 +158,115 @@ const AccountCreate = () => {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label">Website</label>
+                  <label className="form-label">Mobile</label>
                   <input
-                    type="url"
-                    name="website"
-                    value={formData.website}
+                    type="text"
+                    name="mobile"
+                    value={formData.mobile}
                     onChange={handleChange}
                     className="form-control"
                   />
                 </div>
 
+                {/* Account Name dropdown */}
                 <div className="mb-3">
-                  <label className="form-label">Account Number</label>
-                  <input
-                    type="number"
-                    name="accountNumber"
-                    value={formData.accountNumber}
-                    onChange={handleChange}
-                    className="form-control"
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label">Account Type</label>
+                  <label className="form-label">Account Name</label>
                   <select
-                    name="accountType"
-                    value={formData.accountType}
+                    name="accountId"
+                    value={formData.accountId}
+                    onChange={handleChange}
+                    onFocus={handleAccountFocus}
+                    className="form-select"
+                  >
+                    <option value="">Select Account</option>
+                    {loadingAccounts ? (
+                      <option disabled>Loading accounts...</option>
+                    ) : (
+                      accounts.map((acc) => (
+                        <option key={acc.id} value={acc.id}>
+                          {acc.Account_Name || acc.name}
+                        </option>
+                      ))
+                    )}
+                  </select>
+                </div>
+
+                {/* Vendor dropdown */}
+                {/* <div className="mb-3">
+                  <label className="form-label">Vendor Name</label>
+                  <select
+                    name="vendorId"
+                    value={formData.vendorId}
+                    onChange={handleChange}
+                    onFocus={handleVendorFocus}
+                    className="form-select"
+                  >
+                    <option value="">Select Vendor</option>
+                    {loadingVendors ? (
+                      <option disabled>Loading vendors...</option>
+                    ) : (
+                      vendors.map((vendor) => (
+                        <option key={vendor.id} value={vendor.id}>
+                          {vendor.Vendor_Name || vendor.name}
+                        </option>
+                      ))
+                    )}
+                  </select>
+                </div> */}
+
+                <div className="mb-3">
+                  <label className="form-label">Title</label>
+                  <input
+                    type="text"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleChange}
+                    className="form-control"
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">Department</label>
+                  <input
+                    type="text"
+                    name="department"
+                    value={formData.department}
+                    onChange={handleChange}
+                    className="form-control"
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">Lead Source</label>
+                  <select
+                    name="leadSource"
+                    value={formData.leadSource}
                     onChange={handleChange}
                     className="form-select"
                   >
-                    <option value="">Select Type</option>
-                    <option value="Analyst">Analyst</option>
-                    <option value="Competitor">Competitor</option>
-                    <option value="Distributor">Distributor</option>
-                    <option value="Investor">Investor</option>
-                    <option value="Other">Other</option>
+                    <option value="">Select Source</option>
+                    <option value="Cold Call">Cold Call</option>
+                    <option value="Employee Referral">Employee Referral</option>
+                    <option value="Online Store">Online Store</option>
                     <option value="Partner">Partner</option>
-                    <option value="Press">Press</option>
-                    <option value="Prospect">Prospect</option>
-                    <option value="Reseller">Reseller</option>
-                    <option value="Supplier">Supplier</option>
-                    <option value="Vendor">Vendor</option>
+                    <option value="Public Relations">Public Relations</option>
+                    <option value="Trade Show">Trade Show</option>
+                    <option value="Web Download">Web Download</option>
+                    <option value="Web Research">Web Research</option>
+                    <option value="Chat">Chat</option>
                   </select>
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label">Industry</label>
-                  <select
-                    name="industry"
-                    value={formData.industry}
-                    onChange={handleChange}
-                    className="form-select"
-                  >
-                    <option value="">Select Industry</option>
-                    <option value="ASP">
-                      ASP (Application Service Provider)
-                    </option>
-                    <option value="Data/Telecom OEM">Data / Telecom OEM</option>
-                    <option value="ERP">
-                      ERP (Enterprise Resource Planning)
-                    </option>
-                    <option value="Government">Government / Industry</option>
-                    <option value="Manufacturing">Manufacturing</option>
-                    <option value="Large Enterprise">Large Enterprise</option>
-                    <option value="Management ISV">Management ISV</option>
-                    <option value="MSP">MSP (Managed Service Provider)</option>
-                    <option value="Network Equipment">
-                      Network Equipment Enterprise
-                    </option>
-                    <option value="Non Management ISP">
-                      Non Management ISP
-                    </option>
-                    <option value="Optical Networking">
-                      Optical Networking
-                    </option>
-                    <option value="SME">Small / Medium Enterprise</option>
-                    <option value="Storage Equipment">Storage Equipment</option>
-                    <option value="Storage Service Provider">
-                      Storage Service Provider
-                    </option>
-                    <option value="Systems Integrator">
-                      Systems Integrator
-                    </option>
-                    <option value="Wireless Industry">Wireless Industry</option>
-                    <option value="Financial Services">
-                      Financial Services
-                    </option>
-                    <option value="Education">Education</option>
-                    <option value="Technology">Technology</option>
-                    <option value="Real Estate">Real Estate</option>
-                    <option value="Consulting">Consulting</option>
-                    <option value="Communications">Communications</option>
-                  </select>
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label">Employees</label>
-                  <input
-                    type="number"
-                    name="employees"
-                    value={formData.employees}
-                    onChange={handleChange}
-                    className="form-control"
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label">Annual Revenue</label>
-                  <input
-                    type="number"
-                    name="annualRevenue"
-                    value={formData.annualRevenue}
-                    onChange={handleChange}
-                    className="form-control"
-                  />
                 </div>
               </div>
 
               {/* Right Column */}
               <div className="col-md-6">
-                <h6 className="fw-bold text-secondary mt-2">Billing Address</h6>
-
+                <h6 className="fw-bold text-secondary mt-2">Mailing Address</h6>
                 <div className="mb-2">
                   <label className="form-label">Street</label>
                   <input
                     type="text"
-                    name="billingStreet"
-                    value={formData.billingStreet}
+                    name="mailingStreet"
+                    value={formData.mailingStreet}
                     onChange={handleChange}
                     className="form-control"
                   />
@@ -257,8 +277,8 @@ const AccountCreate = () => {
                     <label className="form-label">City</label>
                     <input
                       type="text"
-                      name="billingCity"
-                      value={formData.billingCity}
+                      name="mailingCity"
+                      value={formData.mailingCity}
                       onChange={handleChange}
                       className="form-control"
                     />
@@ -267,8 +287,8 @@ const AccountCreate = () => {
                     <label className="form-label">State</label>
                     <input
                       type="text"
-                      name="billingState"
-                      value={formData.billingState}
+                      name="mailingState"
+                      value={formData.mailingState}
                       onChange={handleChange}
                       className="form-control"
                     />
@@ -280,8 +300,8 @@ const AccountCreate = () => {
                     <label className="form-label">Postal Code</label>
                     <input
                       type="text"
-                      name="billingCode"
-                      value={formData.billingCode}
+                      name="mailingCode"
+                      value={formData.mailingCode}
                       onChange={handleChange}
                       className="form-control"
                     />
@@ -290,24 +310,21 @@ const AccountCreate = () => {
                     <label className="form-label">Country</label>
                     <input
                       type="text"
-                      name="billingCountry"
-                      value={formData.billingCountry}
+                      name="mailingCountry"
+                      value={formData.mailingCountry}
                       onChange={handleChange}
                       className="form-control"
                     />
                   </div>
                 </div>
 
-                <h6 className="fw-bold text-secondary mt-3">
-                  Shipping Address
-                </h6>
-
+                <h6 className="fw-bold text-secondary mt-3">Other Address</h6>
                 <div className="mb-2">
                   <label className="form-label">Street</label>
                   <input
                     type="text"
-                    name="shippingStreet"
-                    value={formData.shippingStreet}
+                    name="otherStreet"
+                    value={formData.otherStreet}
                     onChange={handleChange}
                     className="form-control"
                   />
@@ -318,8 +335,8 @@ const AccountCreate = () => {
                     <label className="form-label">City</label>
                     <input
                       type="text"
-                      name="shippingCity"
-                      value={formData.shippingCity}
+                      name="otherCity"
+                      value={formData.otherCity}
                       onChange={handleChange}
                       className="form-control"
                     />
@@ -328,8 +345,8 @@ const AccountCreate = () => {
                     <label className="form-label">State</label>
                     <input
                       type="text"
-                      name="shippingState"
-                      value={formData.shippingState}
+                      name="otherState"
+                      value={formData.otherState}
                       onChange={handleChange}
                       className="form-control"
                     />
@@ -341,8 +358,8 @@ const AccountCreate = () => {
                     <label className="form-label">Postal Code</label>
                     <input
                       type="text"
-                      name="shippingCode"
-                      value={formData.shippingCode}
+                      name="otherCode"
+                      value={formData.otherCode}
                       onChange={handleChange}
                       className="form-control"
                     />
@@ -351,8 +368,8 @@ const AccountCreate = () => {
                     <label className="form-label">Country</label>
                     <input
                       type="text"
-                      name="shippingCountry"
-                      value={formData.shippingCountry}
+                      name="otherCountry"
+                      value={formData.otherCountry}
                       onChange={handleChange}
                       className="form-control"
                     />
@@ -386,7 +403,7 @@ const AccountCreate = () => {
                 type="submit"
                 className="btn btn-primary"
               >
-                {loading ? "Creating" : "Create Account"}
+                {loading ? "Creating..." : "Create Contact"}
               </button>
             </div>
           </form>
@@ -396,4 +413,4 @@ const AccountCreate = () => {
   );
 };
 
-export default AccountCreate;
+export default ContactCreate;
