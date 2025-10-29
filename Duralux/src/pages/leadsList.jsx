@@ -1,4 +1,6 @@
+import LeadsTable from "@/components/leads/LeadsTable";
 import React from "react";
+// import LeadsTable from '@/c'
 
 const LeadsList = () => {
   return (
