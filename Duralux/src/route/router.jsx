@@ -176,10 +176,10 @@ export const router = createBrowserRouter([
         path: "/customers/create",
         element: <CustomersCreate />,
       },
-      {
-        path: "/leads/list",
-        element: <LeadsList />,
-      },
+      // {
+      //   path: "/leads/list",
+      //   element: <LeadsList />,
+      // },
       {
         path: "/leads/view",
         element: <LeadsView />,
