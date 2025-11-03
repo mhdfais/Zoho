@@ -117,7 +117,7 @@ import {
   editTicket,
   getAllTickets,
   getTicketById,
-} from "../controllers/TicketsController";
+} from "../controllers/ticketController";
 
 const router = express.Router();
 
