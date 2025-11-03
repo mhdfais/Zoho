@@ -17,7 +17,7 @@ export const getAccounts = async (req: Request, res: Response) => {
     const message = err.response?.data?.message || err.message;
 
     console.error("Zoho CRM Error:", message);
-
+    
     // Handle 429 rate limit
     if (status === 429) {
       return res.status(429).json({

@@ -86,6 +86,9 @@ import DealsList from "../pages/DealsList";
 import DealCreate from "../pages/DealCreate";
 import DealEdit from "@/components/Deals/DealEdit";
 import LeadList from "../pages/LeadList";
+import DealView from "../pages/DealView";
+import CampaignList from "../pages/CampaignList";
+import CampaignCreate from "../pages/CampaignCreate";
 
 export const router = createBrowserRouter([
   {
@@ -115,6 +118,9 @@ export const router = createBrowserRouter([
       { path: "/sales/deals", element: <DealsList /> },
       { path: "/sales/create-deal", element: <DealCreate /> },
       { path: "/sales/edit-deal/:id", element: <DealEdit /> },
+      { path: "/sales/deal/:id", element: <DealView /> },
+      { path: "/sales/campaigns", element: <CampaignList /> },
+      { path: "/sales/create-campaign", element: <CampaignCreate /> },
 
       {
         path: "/dashboards/analytics",

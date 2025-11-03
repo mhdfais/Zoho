@@ -374,3 +374,83 @@ export const deleteDeal = async (id) => {
     throw error;
   }
 };
+
+export const getAllCampaigns = async () => {
+  try {
+    const response = await api.get("/crm/campaigns");
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get campaigns. Try again later.");
+    }
+    throw error;
+  }
+};
+
+export const getCampaignById = async (id) => {
+  try {
+    const response = await api.get(`/crm/campaigns/${id}`);
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get campaign. Try again later.");
+    }
+    throw error;
+  }
+};
+
+export const createCampaign = async (formData) => {
+  try {
+    const response = await api.post("/crm/campaigns", formData);
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to create campaigns. Try again later.");
+    }
+    throw error;
+  }
+};
+
+export const editCampaign = async (id, formData) => {
+  try {
+    const response = await api.put(`/crm/campaigns/${id}`, formData);
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to edit campaigns. Try again later.");
+    }
+    throw error;
+  }
+};
+
+export const deleteCampaign = async (id) => {
+  try {
+    const response = await api.delete(`/crm/campaigns/${id}`);
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to delete campaigns. Try again later.");
+    }
+    throw error;
+  }
+};

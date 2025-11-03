@@ -1,3 +1,5 @@
+import { id } from "date-fns/locale";
+
 export const menuList = [
   {
     id: 0,
@@ -47,6 +49,12 @@ export const menuList = [
         id: 4,
         name: "Deals",
         path: "/sales/deals",
+        subdropdownMenu: false,
+      },
+      {
+        id: 5,
+        name: "Campaigns",
+        path: "/sales/campaigns",
         subdropdownMenu: false,
       },
     ],

@@ -44,7 +44,7 @@ const clientSecret = process.env.ZOHO_CLIENT_SECRET;
 
 export const authorize = async (req: Request, res: Response) => {
   try {
-    const authUrl = `https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.ALL,ZohoCRM.settings.modules.READ&client_id=${clientId}&response_type=code&access_type=offline&redirect_uri=${redirectUrl}`;
+    const authUrl = `https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.ALL,ZohoCRM.settings.modules.READ,Desk.tickets.ALL,Desk.search.READ,Desk.settings.ALL&client_id=${clientId}&response_type=code&access_type=offline&redirect_uri=${redirectUrl}`;
 
     res.redirect(authUrl);
   } catch (error) {
@@ -87,7 +87,7 @@ export const zohoCallback = async (req: Request, res: Response) => {
   }
 };
 
-let cachedToken : string|null=null;
+let cachedToken: string | null = null;
 let tokenExpiry = 0;
 export const getAccessToken = async () => {
   const now = Date.now();

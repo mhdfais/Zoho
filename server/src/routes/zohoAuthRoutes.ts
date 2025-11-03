@@ -3,7 +3,6 @@ import {
   authorize,
   checkZohoStatus,
   // fetchLeads,
-  fetchTickets,
   handleLogout,
   zohoCallback,
 } from "../controllers/zohoAuthController";
@@ -28,6 +27,5 @@ router.get("/zoho/status", checkZohoStatus);
 // router.get("/leads", fetchLeads);
 
 // Zoho Desk
-router.get("/tickets", fetchTickets);
-
+// router.get("/tickets", fetchTickets);
 export default router;
