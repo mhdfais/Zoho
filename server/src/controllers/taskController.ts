@@ -9,7 +9,7 @@ export const getAllTasks = async (req: Request, res: Response) => {
     const token = await getAccessToken();
 
     const fields =
-      "Subject,Due_Date,Status,Priority,Owner,What_Id,Who_Id";
+      "Subject,Due_Date,Status,Priority,Owner,What_Id,Who_Id,Created_Time";
 
     const response = await axios.get(`${CRM_BASE}/Tasks?fields=${fields}`, {
       headers: { Authorization: `Zoho-oauthtoken ${token}` },

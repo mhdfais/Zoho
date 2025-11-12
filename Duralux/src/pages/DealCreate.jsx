@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
   createDeal,
-  fetchAccounts,
+  getAllAccounts,
   getAllContacts,
 } from "../services/zohoCrmService";
 
@@ -60,7 +60,7 @@ const DealCreate = () => {
     if (accounts.length > 0) return; // already loaded
     try {
       setLoadingAccounts(true);
-      const res = await fetchAccounts();
+      const res = await getAllAccounts();
       setAccounts(res.data || []);
     } catch (err) {
       toast.error("Failed to load accounts");

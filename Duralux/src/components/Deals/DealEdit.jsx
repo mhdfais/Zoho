@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import {
   //   getDealById,
   editDeal,
-  fetchAccounts,
+  getAllAccounts,
   getAllContacts,
   getDealbyId,
 } from "../../services/zohoCrmService";
@@ -97,7 +97,7 @@ const DealEdit = () => {
     if (accounts.length > 0) return;
     try {
       setLoadingAccounts(true);
-      const res = await fetchAccounts();
+      const res = await getAllAccounts();
       setAccounts(res.data || []);
     } catch (err) {
       toast.error("Failed to load accounts");

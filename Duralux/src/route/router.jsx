@@ -22,7 +22,7 @@ import ProposalEdit from "../pages/proposal-edit";
 import CustomersView from "../pages/customers-view";
 import CustomersCreate from "../pages/customers-create";
 import ProposalCreate from "../pages/proposal-create";
-import LeadsView from "../pages/leads-view";
+import LeadsView from "../pages/LeadDetails";
 import LeadsCreate from "../pages/leads-create";
 import PaymentList from "../pages/payment-list";
 import PaymentView from "../pages/payment-view/";
@@ -71,24 +71,37 @@ import WidgetsMiscellaneous from "../pages/widgets-miscellaneous";
 import Login from "../pages/Login";
 import ProtectedRoute from "../Protected route/ProtectedRoute";
 import PublicRoute from "../Public route/PublicRoute";
-import AccountsList from "../pages/AccountsList";
 import AccountCreate from "../pages/AccountCreate";
 import AccountEdit from "@/components/account/AccountEdit";
 import AccountView from "../pages/AccountView";
 import LeadCreate from "../pages/LeadCreate";
 import LeadEdit from "@/components/leads/LeadEdit";
-import LeadView from "../pages/LeadView";
-import ContactList from "../pages/ContactList";
 import ContactCreate from "../pages/ContactCreate";
 import ContactEdit from "@/components/contact/ContactEdit";
-import ContactView from "../pages/ContactView";
-import DealsList from "../pages/DealsList";
+import ContactView from "../pages/Contacts";
 import DealCreate from "../pages/DealCreate";
 import DealEdit from "@/components/Deals/DealEdit";
-import LeadList from "../pages/LeadList";
+import Leads from "../pages/Leads";
 import DealView from "../pages/DealView";
-import CampaignList from "../pages/CampaignList";
 import CampaignCreate from "../pages/CampaignCreate";
+import Tasks from "../pages/Tasks";
+import Calls from "../pages/Calls";
+import Meetings from "../pages/Meetings";
+import Contacts from "../pages/Contacts";
+import Accounts from "../pages/Accounts";
+import Deals from "../pages/Deals";
+import Campaigns from "../pages/Campaigns";
+import PriceBooks from "../pages/PriceBooks";
+import Products from "../pages/Products";
+import Quotes from "../pages/Quotes";
+import Invoices from "../pages/Invoices";
+import SalesOrders from "../pages/SalesOrders";
+import Solutions from "../pages/Solutions";
+import PurchaseOrders from "../pages/PurchaseOrders";
+import Vendors from "../pages/Vendors";
+import Cases from "../pages/Cases";
+import Tickets from "../pages/Tickets";
+import LeadDetails from "../pages/LeadDetails";
 
 export const router = createBrowserRouter([
   {
@@ -96,31 +109,44 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        path: "/",
+        path: "/home",
         element: (
           <ProtectedRoute>
             <Home />
           </ProtectedRoute>
         ),
       },
-      { path: "/sales/accounts", element: <AccountsList /> },
+      { path: "/sales/accounts", element: <Accounts /> },
       { path: "/sales/create-account", element: <AccountCreate /> },
       { path: "/sales/edit-account/:id", element: <AccountEdit /> },
       { path: "/sales/account/:id", element: <AccountView /> },
-      { path: "/sales/leads", element: <LeadList /> },
+      { path: "/sales/leads", element: <Leads /> },
       { path: "/sales/create-lead", element: <LeadCreate /> },
       { path: "/sales/edit-lead/:id", element: <LeadEdit /> },
-      { path: "/sales/lead/:id", element: <LeadView /> },
-      { path: "/sales/contacts", element: <ContactList /> },
+      { path: "/sales/lead/:id", element: <LeadDetails/>  },
+      { path: "/sales/contacts", element: <Contacts /> },
       { path: "/sales/create-contact", element: <ContactCreate /> },
       { path: "/sales/edit-contact/:id", element: <ContactEdit /> },
       { path: "/sales/contact/:id", element: <ContactView /> },
-      { path: "/sales/deals", element: <DealsList /> },
+      { path: "/sales/deals", element: <Deals /> },
       { path: "/sales/create-deal", element: <DealCreate /> },
       { path: "/sales/edit-deal/:id", element: <DealEdit /> },
       { path: "/sales/deal/:id", element: <DealView /> },
-      { path: "/sales/campaigns", element: <CampaignList /> },
+      { path: "/sales/campaigns", element: <Campaigns /> },
       { path: "/sales/create-campaign", element: <CampaignCreate /> },
+      { path: "/activities/tasks", element: <Tasks /> },
+      { path: "/activities/calls", element: <Calls /> },
+      { path: "/activities/meetings", element: <Meetings /> },
+      { path: "/priceBooks", element: <PriceBooks /> },
+      { path: "/products", element: <Products /> },
+      { path: "/quotes", element: <Quotes /> },
+      { path: "/invoices", element: <Invoices /> },
+      { path: "/salesOrders", element: <SalesOrders /> },
+      { path: "/solutions", element: <Solutions /> },
+      { path: "/purchaseOrders", element: <PurchaseOrders /> },
+      {path:'/vendors',element:<Vendors/>},
+      {path:'/cases',element:<Cases/>},
+      {path:'/tickets',element:<Tickets/>},
 
       {
         path: "/dashboards/analytics",

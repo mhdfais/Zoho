@@ -118,8 +118,20 @@ import {
   getAllTickets,
   getTicketById,
 } from "../controllers/ticketController";
+import { statistics } from "../controllers/dashboardController";
+import {
+  createMeeting,
+  deleteMeeting,
+  editMeeting,
+  getAllMeetings,
+  getMeetingById,
+} from "../controllers/meetingsController";
 
 const router = express.Router();
+
+// dashboard
+// router.get("/statistics", statistics);
+router.get("/statistics", statistics);
 
 //  accounts
 router.route("/accounts").get(getAccounts).post(createAccount);
@@ -160,6 +172,14 @@ router.route("/tasks/:id").get(getTaskById).put(editTask).delete(deleteTask);
 // calls
 router.route("/calls").get(getAllCalls).post(createCall);
 router.route("/calls/:id").get(getCallById).put(editCall).delete(deleteCall);
+
+// meetings
+router.route("/meetings").get(getAllMeetings).post(createMeeting);
+router
+  .route("/meetings/:id")
+  .get(getMeetingById)
+  .put(editMeeting)
+  .delete(deleteMeeting);
 
 // books price
 router.route("/pricebooks").get(getAllPriceBooks).post(createPriceBook);

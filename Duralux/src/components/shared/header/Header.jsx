@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { FiAlignLeft, FiArrowLeft, FiArrowRight, FiChevronRight, FiMaximize, FiMinimize, FiMoon, FiPlus, FiSun, } from "react-icons/fi";
+import { FiAlignLeft, FiArrowLeft, FiArrowRight, FiChevronRight, FiMaximize, FiMinimize, FiMoon, FiPlus, FiSearch, FiSun, } from "react-icons/fi";
 import LanguagesModal from './LanguagesModal';
 import NotificationsModal from './NotificationsModal';
 import ProfileModal from './ProfileModal';
@@ -8,6 +8,7 @@ import TimesheetsModal from './TimesheetsModal';
 import HeaderDropDownModal from './HeaderDropDownModal';
 import MegaMenu from './megaManu/MegaMenu';
 import { NavigationContext } from '../../../contentApi/navigationProvider';
+
 
 
 const Header = () => {
@@ -139,6 +140,10 @@ const Header = () => {
                             </div>
                         </div>
                     </a>
+                    <div className='search-bar bg-light px-3 rounded'>
+                         <FiSearch className='text-secondary' size={15} />
+                         <input className='bg-transparent border-0' type="text" name="" id="" placeholder='Search...' />
+                    </div>
                     {/* <!--! [Start] nxl-head-mobile-toggler !-->
                     <!--! [Start] nxl-navigation-toggle !--> */}
                     <div className="nxl-navigation-toggle navigation-up-1600">
@@ -153,17 +158,17 @@ const Header = () => {
                         <a href="#" onClick={(e) => handleNavigationExpendDown(e, "hide")} id="menu-mini-button" ref={miniButtonRef} style={{ display: navigationExpend ? "block" : "none" }}>
                             <FiAlignLeft size={24} />
                         </a>
-                        <a href="#" onClick={(e) => handleNavigationExpendDown(e, "show")} id="menu-expend-button" ref={expendButtonRef} style={{ display: navigationExpend ? "none" : "block" }}>
+                        {/* <a href="#" onClick={(e) => handleNavigationExpendDown(e, "show")} id="menu-expend-button" ref={expendButtonRef} style={{ display: navigationExpend ? "none" : "block" }}>
                             <FiArrowRight size={24} />
-                        </a>
+                        </a> */}
                     </div>
                     {/* <!--! [End] nxl-navigation-toggle !-->
                     <!--! [Start] nxl-lavel-mega-menu-toggle !--> */}
-                    <div className="nxl-lavel-mega-menu-toggle d-flex d-lg-none">
+                    {/* <div className="nxl-lavel-mega-menu-toggle d-flex d-lg-none">
                         <a href="#" onClick={(e) => {e.preventDefault(), setOpenMegaMenu(true)}} id="nxl-lavel-mega-menu-open">
                             <FiAlignLeft size={24} />
                         </a>
-                    </div>
+                    </div> */}
                     {/* <!--! [End] nxl-lavel-mega-menu-toggle !-->
                     <!--! [Start] nxl-lavel-mega-menu !--> */}
                     <div className="nxl-drp-link nxl-lavel-mega-menu">
@@ -175,8 +180,8 @@ const Header = () => {
                         </div>
                         {/* <!--! [Start] nxl-lavel-mega-menu-wrapper !--> */}
                         <div className="nxl-lavel-mega-menu-wrapper d-flex gap-3">
-                            <HeaderDropDownModal />
-                            <MegaMenu />
+                            {/* <HeaderDropDownModal /> */}
+                            {/* <MegaMenu /> */}
                         </div>
                     </div>
                 </div>
@@ -184,26 +189,26 @@ const Header = () => {
                 <!--! [Start] Header Right !--> */}
                 <div className="header-right ms-auto">
                     <div className="d-flex align-items-center">
-                        <SearchModal />
-                        <LanguagesModal />
-                        <div className="nxl-h-item d-none d-sm-flex" >
+                        {/* <SearchModal /> */}
+                        {/* <LanguagesModal /> */}
+                        {/* <div className="nxl-h-item d-none d-sm-flex" >
                             <div className="full-screen-switcher">
                                 <span className="nxl-head-link me-0">
                                     <FiMaximize size={20} className="maximize" onClick={fullScreenMaximize} />
                                     <FiMinimize size={20} className="minimize" onClick={fullScreenMinimize} />
                                 </span>
                             </div>
-                        </div>
-                        <div className="nxl-h-item dark-light-theme">
+                        </div> */}
+                        {/* <div className="nxl-h-item dark-light-theme">
                             <div className="nxl-head-link me-0 dark-button" onClick={() => handleThemeMode("dark")}>
                                 <FiMoon size={20} />
                             </div>
                             <div className="nxl-head-link me-0 light-button" onClick={() => handleThemeMode("light")} style={{ display: "none" }}>
                                 <FiSun size={20} />
                             </div>
-                        </div>
-                        <TimesheetsModal />
-                        <NotificationsModal />
+                        </div> */}
+                        {/* <TimesheetsModal /> */}
+                        {/* <NotificationsModal /> */}
                         <ProfileModal />
                     </div>
                 </div>

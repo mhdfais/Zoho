@@ -17,17 +17,18 @@ const NavigationManu = () => {
                 <div className="m-header">
                     <Link to="/" className="b-brand">
                         {/* <!-- ========   change your logo hear   ============ --> */}
-                        <img src="/images/logo-full.png" alt="logo" className="logo logo-lg" />
-                        <img src="/images/logo-abbr.png" alt="logo" className="logo logo-sm" />
+                        {/* <img src="" alt="" /> */}
+                        <img src="/images/swapandgo-logo.png" alt="logo" className="w-100 " />
+                        {/* <img src="/images/logo-abbr.png" alt="logo" className="logo logo-sm" /> */}
                     </Link>
                 </div>
 
                 <div className={`navbar-content`}>
                     <PerfectScrollbar>
                         <ul className="nxl-navbar">
-                            <li className="nxl-item nxl-caption">
+                            {/* <li className="nxl-item nxl-caption">
                                 <label>Navigation</label>
-                            </li>
+                            </li> */}
                             <Menus />
                         </ul>
                         <div className="card text-center">

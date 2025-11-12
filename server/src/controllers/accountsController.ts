@@ -7,7 +7,7 @@ const CRM_BASE = "https://www.zohoapis.com/crm/v8";
 export const getAccounts = async (req: Request, res: Response) => {
   try {
     const token = await getAccessToken();
-    const fields = "Account_Name,Phone,Website,Owner";
+    const fields = "Account_Name,Phone,Website,Industry,Owner";
     const response = await axios.get(`${CRM_BASE}/Accounts?fields=${fields}`, {
       headers: { Authorization: `Zoho-oauthtoken ${token}` },
     });

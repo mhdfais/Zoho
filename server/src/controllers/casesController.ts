@@ -9,7 +9,7 @@ export const getAllCases = async (req: Request, res: Response) => {
     const token = await getAccessToken();
 
     const fields =
-      "Case_Number,Subject,Status,Priority,Account_Name,Contact_Name,Owner";
+      "Case_Number,Subject,Status,Priority,Account_Name,Related_To,Case_Origin,Owner";
 
     const response = await axios.get(`${CRM_BASE}/Cases?fields=${fields}`, {
       headers: { Authorization: `Zoho-oauthtoken ${token}` },

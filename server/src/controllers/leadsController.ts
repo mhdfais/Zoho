@@ -8,7 +8,7 @@ export const getLeads = async (req: Request, res: Response) => {
   try {
     const token = await getAccessToken();
 
-    const fields = "Full_Name,Company,Email,Phone,Lead_Source,Owner";
+    const fields = "Full_Name,Company,Email,Phone,Lead_Source,Owner,Created_Time";
 
     const response = await axios.get(`${CRM_BASE}/Leads?fields=${fields}`, {
       headers: {

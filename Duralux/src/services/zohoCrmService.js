@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import { api } from "./api";
 
-export const fetchAccounts = async () => {
+export const getAllAccounts = async () => {
   try {
     const response = await api.get("/crm/accounts");
     return response.data;
@@ -454,3 +454,221 @@ export const deleteCampaign = async (id) => {
     throw error;
   }
 };
+
+export const getTasks = async () => {
+  try {
+    const response = await api.get(`/crm/tasks`);
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get tasks. Try again later.");
+    }
+    throw error;
+  }
+};
+
+export const getCalls=async()=>{
+  try {
+    const response=await api.get('/crm/calls')
+    return response.data
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get calls. Try again later.");
+    }
+    throw error;
+  }
+}
+
+export const getMeetings=async()=>{
+  try {
+    const response=await api.get('/crm/meetings')
+    return response.data
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get meetings. Try again later.");
+    }
+    throw error;
+  }
+}
+
+// price books
+export const getAllPriceBooks=async()=>{
+   try {
+    const response=await api.get('/crm/pricebooks')
+    return response.data
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get price books. Try again later.");
+    }
+    throw error;
+  }
+}
+
+// products
+export const getAllProducts=async()=>{
+ try {
+    const response=await api.get('/crm/products')
+    return response.data
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get products. Try again later.");
+    }
+    throw error;
+  }
+}
+
+// quotes
+export const getAllQuotes=async()=>{
+ try {
+    const response=await api.get('/crm/quotes')
+    return response.data
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get quotes. Try again later.");
+    }
+    throw error;
+  }
+}
+
+// invoices
+export const getAllInvoices=async()=>{
+ try {
+    const response=await api.get('/crm/invoices')
+    return response.data
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get invoices. Try again later.");
+    }
+    throw error;
+  }
+}
+
+// sales orders
+export const getAllSalesOrders=async()=>{
+ try {
+    const response=await api.get('/crm/salesorders')
+    return response.data
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get sales orders. Try again later.");
+    }
+    throw error;
+  }
+}
+
+// solutions
+export const getAllSolutions=async()=>{
+ try {
+    const response=await api.get('/crm/solutions')
+    return response.data
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get sales orders. Try again later.");
+    }
+    throw error;
+  }
+}
+
+// purchase orders
+export const getAllPurchaseOrders=async()=>{
+ try {
+    const response=await api.get('/crm/purchaseorders')
+    return response.data
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get sales orders. Try again later.");
+    }
+    throw error;
+  }
+}
+
+// cases
+export const getAllCases=async()=>{
+ try {
+    const response=await api.get('/crm/cases')
+    return response.data
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get cases. Try again later.");
+    }
+    throw error;
+  }
+}
+
+// vendors
+export const getAllVendors=async()=>{
+ try {
+    const response=await api.get('/crm/vendors')
+    return response.data
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get vendors. Try again later.");
+    }
+    throw error;
+  }
+}
+
+// desk
+export const getAllTickets=async()=>{
+ try {
+    const response=await api.get('/crm/tickets')
+    return response.data
+  } catch (error) {
+    if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a few seconds.");
+    } else if (error.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+    } else {
+      toast.error("Failed to get tickets. Try again later.");
+    }
+    throw error;
+  }
+}

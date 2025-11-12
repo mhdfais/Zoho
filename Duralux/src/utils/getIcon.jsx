@@ -6,6 +6,7 @@ import {
   BsEnvelopePlus,
   BsEnvelopeSlash,
 } from "react-icons/bs";
+import { FaListUl } from "react-icons/fa";
 import {
   FaBriefcase,
   FaBuilding,
@@ -116,6 +117,16 @@ import {
   FiYoutube,
 } from "react-icons/fi";
 import { LiaMoneyBillWaveAltSolid } from "react-icons/lia";
+import { IoPricetagsOutline } from "react-icons/io5";
+import { AiOutlineProduct } from "react-icons/ai";
+import { LuTextQuote } from "react-icons/lu";
+import { LiaFileInvoiceSolid } from "react-icons/lia";
+import { FaFileInvoiceDollar } from "react-icons/fa";
+import { AiOutlineSolution } from "react-icons/ai";
+import { CiShoppingCart } from "react-icons/ci";
+import { BiBuildingHouse } from "react-icons/bi";
+import { BsTicket } from "react-icons/bs";
+import { PiTicket } from "react-icons/pi";
 
 const getIcon = (name) => {
   switch (name) {
@@ -346,6 +357,30 @@ const getIcon = (name) => {
       return <BsEnvelopeHeart />;
     case "bi-envelope-slash":
       return <BsEnvelopeSlash />;
+
+    //
+    case "activities":
+      return <FaListUl />;
+    case "price-tag":
+      return <IoPricetagsOutline />;
+    case "products":
+      return <AiOutlineProduct />;
+    case "quotes":
+      return <LuTextQuote />;
+    case "invoices":
+      return <LiaFileInvoiceSolid />;
+    case "sales-order":
+      return <FaFileInvoiceDollar />;
+    case "solutions":
+      return <AiOutlineSolution />;
+    case "purchase-order":
+      return <CiShoppingCart/>;
+    case "vendors":
+      return<BiBuildingHouse/>  
+    case "cases":
+      return<BsTicket/>  
+    case "tickets":
+      return<PiTicket/>  
 
     default:
       break;

@@ -8,6 +8,7 @@ dotenv.config();
 const clientId = process.env.ZOHO_CLIENT_ID;
 const redirectUrl = process.env.ZOHO_REDIRECT_URI;
 const clientSecret = process.env.ZOHO_CLIENT_SECRET;
+const CRM_BASE = "https://www.zohoapis.com/crm/v8";
 
 // export const zohoLogin = async (req: Request, res: Response) => {
 //   console.log("hee");
@@ -42,9 +43,22 @@ const clientSecret = process.env.ZOHO_CLIENT_SECRET;
 //   }
 // };
 
+export const getCurrentUser = async (req: Request, res: Response) => {
+  try {
+    const token = await getAccessToken();
+    // console.log(token)
+    const response = await axios.get(`${CRM_BASE}/users?type=CurrentUser`, {
+      headers: { Authorization: `Zoho-oauthtoken ${token}` },
+    });
+    res.json(response.data);
+  } catch (error: any) {
+    console.error("error getting current user", error.response.data);
+  }
+};
+
 export const authorize = async (req: Request, res: Response) => {
   try {
-    const authUrl = `https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.ALL,ZohoCRM.settings.modules.READ,Desk.tickets.ALL,Desk.search.READ,Desk.settings.ALL&client_id=${clientId}&response_type=code&access_type=offline&redirect_uri=${redirectUrl}`;
+    const authUrl = `https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.ALL,ZohoCRM.settings.modules.READ,ZohoCRM.users.READ,Desk.tickets.ALL,Desk.search.READ,Desk.settings.ALL&client_id=${clientId}&response_type=code&access_type=offline&redirect_uri=${redirectUrl}`;
 
     res.redirect(authUrl);
   } catch (error) {

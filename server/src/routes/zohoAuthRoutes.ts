@@ -2,6 +2,7 @@ import express from "express";
 import {
   authorize,
   checkZohoStatus,
+  getCurrentUser,
   // fetchLeads,
   handleLogout,
   zohoCallback,
@@ -13,6 +14,7 @@ router.get("/authorize", authorize);
 router.get("/oauth/zoho/callback", zohoCallback);
 router.post("/logout", handleLogout);
 router.get("/zoho/status", checkZohoStatus);
+router.get('/currentUser',getCurrentUser)
 
 // router.post(
 //   "/checkpost",

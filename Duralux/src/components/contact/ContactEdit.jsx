@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   getContactById,
   editContact,
-  fetchAccounts,
+  getAllAccounts  ,
 } from "../../services/zohoCrmService";
 import toast from "react-hot-toast";
 
@@ -97,7 +97,7 @@ const ContactEdit = () => {
     if (accounts.length > 0) return;
     try {
       setAccountsLoading(true);
-      const res = await fetchAccounts();
+      const res = await getAllAccounts  ();
       setAccounts(res.data || []);
     } catch (error) {
       toast.error("Failed to load accounts.");

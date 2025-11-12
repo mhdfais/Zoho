@@ -1,37 +1,35 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
-  FiActivity,
-  FiBell,
-  FiChevronRight,
-  FiDollarSign,
   FiLogOut,
-  FiSettings,
-  FiUser,
 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../../services/authService";
+import { getCurrentuser, logout } from "../../../services/authService";
 import { useDispatch } from "react-redux";
 import { logout as logoutRedux } from "../../../redux/zohoSlice";
+import { RiAccountCircleFill } from "react-icons/ri";
+import toast from "react-hot-toast";
+import { IoIosArrowDown } from "react-icons/io";
 
-const activePosition = [
-  "Active",
-  "Always",
-  "Bussy",
-  "Inactive",
-  "Disabled",
-  "Cutomization",
-];
-const subscriptionsList = [
-  "Plan",
-  "Billings",
-  "Referrals",
-  "Payments",
-  "Statements",
-  "Subscriptions",
-];
+// const activePosition = [
+//   "Active",
+//   "Always",
+//   "Bussy",
+//   "Inactive",
+//   "Disabled",
+//   "Cutomization",
+// ];
+// const subscriptionsList = [
+//   "Plan",
+//   "Billings",
+//   "Referrals",
+//   "Payments",
+//   "Statements",
+//   "Subscriptions",
+// ];
 const ProfileModal = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [currentUser, setCurrentUser] = useState([]);
 
   const handleLogout = async () => {
     try {
@@ -42,6 +40,18 @@ const ProfileModal = () => {
       console.error("error logging out");
     }
   };
+  useEffect(() => {
+    const getUserdetail = async () => {
+      try {
+        const res = await getCurrentuser();
+        setCurrentUser(res.users[0]);
+        // console.log(res.users[0]);
+      } catch (error) {
+        toast.error("error get user detail");
+      }
+    };
+    getUserdetail();
+  }, []);
 
   return (
     <div className="dropdown nxl-h-item">
@@ -50,35 +60,50 @@ const ProfileModal = () => {
         data-bs-toggle="dropdown"
         role="button"
         data-bs-auto-close="outside"
+        className="d-flex gap-2 align-items-center"
       >
-        <img
-          src="/images/avatar/1.png"
-          alt="user-image"
-          className="img-fluid user-avtar me-0"
-        />
+        <RiAccountCircleFill size={25} className="text-secondary" />
+        <div>
+          <p className="pt-3">
+            {currentUser?.first_name != null
+              ? `${currentUser.first_name}${
+                  currentUser?.last_name != null
+                    ? " " + currentUser.last_name
+                    : ""
+                }`
+              : currentUser?.last_name != null
+              ? currentUser.last_name
+              : null}
+          </p>
+        </div>
+        <IoIosArrowDown className="" />
       </a>
       <div className="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-user-dropdown">
         <div className="dropdown-header">
-          <div className="d-flex align-items-center">
-            <img
-              src="/images/avatar/1.png"
-              alt="user-image"
-              className="img-fluid user-avtar"
-            />
+          <div className="d-flex align-items-center gap-3">
+            <RiAccountCircleFill size={35} className="text-secondary" />
             <div>
-              <h6 className="text-dark mb-0">
-                Alexandra Della{" "}
-                <span className="badge bg-soft-success text-success ms-1">
+              <h6 className="text-dark mb-0 pl-2">
+                {currentUser?.first_name != null
+                  ? `${currentUser.first_name}${
+                      currentUser?.last_name != null
+                        ? " " + currentUser.last_name
+                        : ""
+                    }`
+                  : currentUser?.last_name != null
+                  ? currentUser.last_name
+                  : null}{" "}
+                {/* <span className="badge bg-soft-success text-success ms-1">
                   PRO
-                </span>
+                </span> */}
               </h6>
               <span className="fs-12 fw-medium text-muted">
-                alex.della@outlook.com
+                {currentUser.email || "N/A"}
               </span>
             </div>
           </div>
         </div>
-        <div className="dropdown">
+        {/* <div className="dropdown">
           <a href="#" className="dropdown-item" data-bs-toggle="dropdown">
             <span className="hstack">
               <i className="wd-10 ht-10 border border-2 border-gray-1 bg-success rounded-circle me-2"></i>
@@ -109,8 +134,8 @@ const ProfileModal = () => {
               );
             })}
           </div>
-        </div>
-        <div className="dropdown-divider"></div>
+        </div> */}
+        {/* <div className="dropdown-divider"></div>
         <div className="dropdown">
           <a href="#" className="dropdown-item" data-bs-toggle="dropdown">
             <span className="hstack">
@@ -171,8 +196,8 @@ const ProfileModal = () => {
             <FiSettings />
           </i>
           <span>Account Settings</span>
-        </a>
-        <div className="dropdown-divider"></div>
+        </a> */}
+        {/* <div className="dropdown-divider"></div> */}
         <a onClick={handleLogout} className="dropdown-item">
           <i>
             {" "}

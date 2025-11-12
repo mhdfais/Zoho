@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { createContact, fetchAccounts } from "../services/zohoCrmService";
+import { createContact, getAllAccounts } from "../services/zohoCrmService";
 
 const ContactCreate = () => {
   const [formData, setFormData] = useState({
@@ -45,7 +45,7 @@ const ContactCreate = () => {
     if (accounts.length > 0) return;
     try {
       setLoadingAccounts(true);
-      const res = await fetchAccounts();
+      const res = await getAllAccounts();
       setAccounts(res.data || []);
       //   console.log(res)
     } catch (err) {

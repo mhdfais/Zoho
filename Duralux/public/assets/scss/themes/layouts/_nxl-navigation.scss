@@ -3,13 +3,18 @@
 <--! Navigarion CSS Start !-->
 <--!----------------------------------------------------------------!-->
 */
+
+ .menu-text{
+	font-size: 0.8rem;
+ }
+
 .nxl-navigation {
 	top: 0;
 	bottom: 0;
-	z-index: 1026;
+	// z-index: 1026;
 	position: fixed;
 	background: $white;
-	width: $navigation-width;
+	// width: $navigation-width;
 	transition: all 0.3s ease;
 
 	.m-header {
@@ -21,8 +26,9 @@
 		align-items: center;
 		height: $header-height;
 		background: $white;
-		border-right: 1px solid $border-color;
-		border-bottom: 1px solid $border-color;
+		width: 13.4rem;
+		// border-right: 1px solid $border-color;
+		// border-bottom: 1px solid $border-color;
 
 		.logo-sm {
 			display: none;
@@ -67,13 +73,13 @@
 		}
 
 		.nxl-micon {
-			margin-right: 12px;
+			margin-right: 6px;
 			display: inline-block;
 			vertical-align: middle;
 
 
 			svg {
-				font-size: 18px;
+				font-size: 15px;
 				stroke-width: 1.7px;
 			}
 
@@ -316,10 +322,10 @@ html.minimenu {
 
 	/*minimenu-hover-expend*/
 	.nxl-navigation {
-		&:hover {
+		&{
 			.navbar-content {
 				position: absolute !important;
-				width: $navigation-width;
+				width: 215px;
 				background-color: $white;
 				border-right: 1px solid $border-color;
 				transition: all 0.3s ease;
@@ -335,7 +341,7 @@ html.minimenu {
 				.nxl-link {
 					margin: 0 15px;
 					margin-bottom: 3px;
-					padding: 10px 20px;
+					padding: 8px 20px;
 				}
 
 				.nxl-submenu {

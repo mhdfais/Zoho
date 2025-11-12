@@ -52,7 +52,7 @@ const Menus = () => {
                     >
                         <Link to={path} className="nxl-link text-capitalize">
                             <span className="nxl-micon"> {getIcon(icon)} </span>
-                            <span className="nxl-mtext" style={{ paddingLeft: "2.5px" }}>
+                            <span className="nxl-mtext menu-text" style={{ paddingLeft: "2.5px" }}>
                                 {name}
                             </span>
                             <span className="nxl-arrow fs-16">
